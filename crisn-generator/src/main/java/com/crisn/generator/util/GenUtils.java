@@ -2,6 +2,7 @@ package com.crisn.generator.util;
 
 import java.util.Arrays;
 
+import cn.hutool.core.util.StrUtil;
 import org.apache.commons.lang3.RegExUtils;
 import com.crisn.common.constant.GenConst;
 import com.crisn.common.utils.StringUtil;
@@ -19,10 +20,14 @@ public class GenUtils {
      * 初始化表信息
      */
     public static void initTable(GenTable genTable, String operName) {
-        genTable.setClassName(convertClassName(genTable.getTableName()));
+        String tableName = genTable.getTableName();
+        int idx = StrUtil.indexOf(tableName, '_');
+        String before = StrUtil.subPre(tableName, idx);
+        String after = StrUtil.subSuf(tableName, idx + 1);
+        genTable.setClassName(convertClassName(tableName));
         genTable.setPackageName(GenConfig.getPackageName());
-        genTable.setModuleName(getModuleName(GenConfig.getPackageName()));
-        genTable.setBusinessName(getBusinessName(genTable.getTableName()));
+        genTable.setModuleName(before);
+        genTable.setBusinessName(after);
         genTable.setFunctionName(replaceText(genTable.getTableComment()));
         genTable.setFunctionAuthor(GenConfig.getAuthor());
         genTable.setCreateBy(operName);
