@@ -35,32 +35,35 @@ public class ${ClassName}Controller extends BaseController {
     private ${ClassName}Service ${className}Service;
 
     /**
-     * 查询-${functionName}列表
+     * 分页-${functionName}
      */
-    @PreAuthorize("@ss.hasPermi('${permissionPrefix}:list')")
-    @GetMapping("/list")
-    #if($table.crud || $table.sub)
-    public IPage<${ClassName}> list(${ClassName} ${className}) {
+    @PreAuthorize("@ss.hasPermi('${permissionPrefix}:page')")
+    @GetMapping("/page")
+    public IPage<${ClassName}> page(${ClassName} ${className}) {
         PageDomain domain = TableSupport.buildPageRequest();
         Page<${ClassName}> page = new Page<>(domain.getPageNum(), domain.getPageSize());
         QueryWrapper<${ClassName}> wrapper = WrapperUtil.entityToWrapper(${className});
         return ${className}Service.page(page, wrapper);
     }
-    #elseif($table.tree)
-        public AjaxResult list(${ClassName} ${className}) {
-            QueryWrapper<${ClassName}> wrapper = WrapperUtil.entityToWrapper(${className});
-            List<${ClassName}> list = ${className}Service.list(wrapper);
-            return AjaxResult.success(list);
-        }
-    #end
 
     /**
-     * 导出-${functionName}列表
+     * 列表-${functionName}
      */
-    @PreAuthorize("@ss.hasPermi('${permissionPrefix}:export')")
+    @PreAuthorize("@ss.hasPermi('${permissionPrefix}:list')")
+    @GetMapping("/list")
+    public AjaxResult list(${ClassName} ${className}) {
+        QueryWrapper<${ClassName}> wrapper = WrapperUtil.entityToWrapper(${className});
+        List<${ClassName}> list = ${className}Service.list(wrapper);
+        return AjaxResult.success(list);
+    }
+
+    /**
+     * 导出-${functionName}
+     */
+    @PreAuthorize("@ss.hasPermi('${permissionPrefix}:exp')")
     @Log(title = "${functionName}" , businessType = BusinessTypeEnum.EXPORT)
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, ${ClassName} ${className}) {
+    @PostMapping("/exp")
+    public void exp(HttpServletResponse response, ${ClassName} ${className}) {
         QueryWrapper<${ClassName}> wrapper = WrapperUtil.entityToWrapper(${className});
         List<${ClassName}> list = ${className}Service.list(wrapper);
         ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}. class);
@@ -70,9 +73,9 @@ public class ${ClassName}Controller extends BaseController {
     /**
      * 获取-${functionName}详细信息
      */
-    @PreAuthorize("@ss.hasPermi('${permissionPrefix}:query')")
-    @GetMapping(value = "/{${pkColumn.javaField}}")
-    public AjaxResult getInfo(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField}) {
+    @PreAuthorize("@ss.hasPermi('${permissionPrefix}:get')")
+    @GetMapping("/{${pkColumn.javaField}}")
+    public AjaxResult get(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField}) {
         return AjaxResult.success(${className}Service.getById(${pkColumn.javaField}));
     }
 
@@ -99,10 +102,10 @@ public class ${ClassName}Controller extends BaseController {
     /**
      * 删除-${functionName}
      */
-    @PreAuthorize("@ss.hasPermi('${permissionPrefix}:remove')")
+    @PreAuthorize("@ss.hasPermi('${permissionPrefix}:del')")
     @Log(title = "${functionName}" , businessType = BusinessTypeEnum.DELETE)
     @DeleteMapping("/{${pkColumn.javaField}s}")
-    public AjaxResult remove(@PathVariable ${pkColumn.javaType}[] ${pkColumn.javaField}s) {
+    public AjaxResult del(@PathVariable ${pkColumn.javaType}[] ${pkColumn.javaField}s) {
         return toAjax(${className}Service.removeByIds(Arrays.asList(${pkColumn.javaField}s)));
     }
 }
