@@ -28,7 +28,9 @@ public class ${ClassName} extends ${Entity} {
 
 #foreach ($column in $columns)
 #if(!$table.isSuperColumn($column.javaField))
+    #if($column.columnComment.length() > 0)
     /** $column.columnComment */
+    #end
 #if($column.list)
 #set($parentheseIndex=$column.columnComment.indexOf("="))
 #if($parentheseIndex != -1)
