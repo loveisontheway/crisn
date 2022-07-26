@@ -30,9 +30,9 @@ public class ${ClassName} extends ${Entity} {
 #if(!$table.isSuperColumn($column.javaField))
     /** $column.columnComment */
 #if($column.list)
-#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#set($parentheseIndex=$column.columnComment.indexOf("="))
 #if($parentheseIndex != -1)
-#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#set($comment=$column.columnComment.substring(0, $column.columnComment.indexOf("（")))
 #else
 #set($comment=$column.columnComment)
 #end
