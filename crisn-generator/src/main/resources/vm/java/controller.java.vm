@@ -106,6 +106,9 @@ public class ${ClassName}Controller extends BaseController {
     @Log(title = "${functionName}" , businessType = BusinessTypeEnum.DELETE)
     @DeleteMapping("/{${pkColumn.javaField}s}")
     public AjaxResult del(@PathVariable ${pkColumn.javaType}[] ${pkColumn.javaField}s) {
-        return toAjax(${className}Service.removeByIds(Arrays.asList(${pkColumn.javaField}s)));
+        LambdaUpdateWrapper<${ClassName}> wrapper = new LambdaUpdateWrapper<>();
+        wrapper.in(${ClassName}::getId, ${pkColumn.javaField}s);
+        wrapper.set(${ClassName}::getState, 1);
+        return toAjax(${className}Service.update(wrapper));
     }
 }
