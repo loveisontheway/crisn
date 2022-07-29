@@ -233,6 +233,27 @@ public class RedisCache {
     }
 
     /**
+     * 获取Hash数据（key > List）
+     *
+     * @param key key
+     * @return List<T>
+     */
+    public <T> List<T> getCacheMapValue(final String key) {
+        return redisTemplate.opsForHash().values(key);
+    }
+
+    /**
+     * 删除Hash中的数据
+     *
+     * @param key key
+     * @param hkey hash key
+     * @return Long
+     */
+    public Long delCacheMapValue(final String key, Object... hkey) {
+        return redisTemplate.opsForHash().delete(key, hkey);
+    }
+
+    /**
      * 获取多个Hash中的数据
      *
      * @param key   Redis键
@@ -261,5 +282,30 @@ public class RedisCache {
      */
     public Boolean exists(String key) {
         return redisTemplate.hasKey(key);
+    }
+
+    /**
+     * 删除List指定对象元素
+     * 原列表: {1， 2， 3， 4， 5， 2， 1， 2， 5}
+     * 传入参数 value=2, count=1 表示删除列表中value为2的元素一次
+     * 执行后列表: {1， 3， 4， 5， 2， 1， 2， 5}
+     *
+     * @param key   key
+     * @param count 次数
+     * @param value 等同值
+     */
+    public Long removeList(final String key, int count, Object value) {
+        return redisTemplate.opsForList().remove(key, count, value);
+    }
+
+    /**
+     * 删除通配符key（多个）
+     *
+     * @param key key
+     * @return long
+     */
+    public Long removeAst(final String key) {
+        Set<String> keys = redisTemplate.keys(key);
+        return redisTemplate.delete(keys);
     }
 }
