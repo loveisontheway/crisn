@@ -39,6 +39,9 @@ public abstract class WrapperUtil {
                 // get方法
                 method = clazz.getMethod("get" + captureName(fieldName));
                 Object value = method.invoke(entity);
+                if ("state".equals(column)) {
+                    wrapper.eq("state", 0);
+                }
                 if (value instanceof String) {
                     String str = (String) value;
                     wrapper.like(StrUtil.isNotBlank(str), column, value);
