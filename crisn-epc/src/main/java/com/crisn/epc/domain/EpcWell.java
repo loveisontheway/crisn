@@ -18,7 +18,7 @@ public class EpcWell extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Integer id;
 
     /** 工井编码 */
     @Excel(name = "工井编码")
@@ -54,11 +54,11 @@ public class EpcWell extends BaseEntity {
     @Excel(name = "排序")
     private Long sort;
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     public void setCode(String code) {

@@ -75,7 +75,7 @@ public class EpcPersonTypeController extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('epc:person_type:get')")
     @GetMapping("/{id}")
-    public AjaxResult get(@PathVariable("id") Long id) {
+    public AjaxResult get(@PathVariable("id") Integer id) {
         return AjaxResult.success(epcPersonTypeService.getById(id));
     }
 
@@ -105,7 +105,7 @@ public class EpcPersonTypeController extends BaseController {
     @PreAuthorize("@ss.hasPermi('epc:person_type:del')")
     @Log(title = "人员类型" , businessType = BusinessTypeEnum.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult del(@PathVariable Long[] ids) {
+    public AjaxResult del(@PathVariable Integer[] ids) {
         LambdaUpdateWrapper<EpcPersonType> wrapper = new LambdaUpdateWrapper<>();
         wrapper.in(EpcPersonType::getId, ids);
         wrapper.set(EpcPersonType::getState, 1);

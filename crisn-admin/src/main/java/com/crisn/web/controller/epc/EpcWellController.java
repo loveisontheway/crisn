@@ -75,7 +75,7 @@ public class EpcWellController extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('epc:well:get')")
     @GetMapping("/{id}")
-    public AjaxResult get(@PathVariable("id") Long id) {
+    public AjaxResult get(@PathVariable("id") Integer id) {
         return AjaxResult.success(epcWellService.getById(id));
     }
 
@@ -105,7 +105,7 @@ public class EpcWellController extends BaseController {
     @PreAuthorize("@ss.hasPermi('epc:well:del')")
     @Log(title = "工井" , businessType = BusinessTypeEnum.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult del(@PathVariable Long[] ids) {
+    public AjaxResult del(@PathVariable Integer[] ids) {
         LambdaUpdateWrapper<EpcWell> wrapper = new LambdaUpdateWrapper<>();
         wrapper.in(EpcWell::getId, ids);
         wrapper.set(EpcWell::getState, 1);

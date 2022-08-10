@@ -75,7 +75,7 @@ public class EpcProjectController extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('epc:project:get')")
     @GetMapping("/{id}")
-    public AjaxResult get(@PathVariable("id") Long id) {
+    public AjaxResult get(@PathVariable("id") Integer id) {
         return AjaxResult.success(epcProjectService.getById(id));
     }
 
@@ -105,7 +105,7 @@ public class EpcProjectController extends BaseController {
     @PreAuthorize("@ss.hasPermi('epc:project:del')")
     @Log(title = "项目" , businessType = BusinessTypeEnum.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult del(@PathVariable Long[] ids) {
+    public AjaxResult del(@PathVariable Integer[] ids) {
         LambdaUpdateWrapper<EpcProject> wrapper = new LambdaUpdateWrapper<>();
         wrapper.in(EpcProject::getId, ids);
         wrapper.set(EpcProject::getState, 1);

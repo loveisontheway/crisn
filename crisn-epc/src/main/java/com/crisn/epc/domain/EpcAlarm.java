@@ -15,7 +15,7 @@ public class EpcAlarm extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Integer id;
 
     /** 设备编码（外键epc_device） */
     @Excel(name = "设备编码（外键epc_device）")
@@ -37,11 +37,11 @@ public class EpcAlarm extends BaseEntity {
     @Excel(name = "处理状态", readConverterExp = "0=已处理,1=未处理")
     private Integer status;
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     public void setDeviceCode(String deviceCode) {

@@ -15,7 +15,7 @@ public class EpcPerson extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Integer id;
 
     /** 姓名 */
     @Excel(name = "姓名")
@@ -65,11 +65,11 @@ public class EpcPerson extends BaseEntity {
     @Excel(name = "是否离场", readConverterExp = "0=是,1=否")
     private Integer isDeparture;
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     public void setName(String name) {

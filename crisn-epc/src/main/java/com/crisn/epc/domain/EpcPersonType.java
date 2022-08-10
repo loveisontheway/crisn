@@ -15,7 +15,7 @@ public class EpcPersonType extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Integer id;
 
     /** 编码 */
     @Excel(name = "编码")
@@ -33,11 +33,11 @@ public class EpcPersonType extends BaseEntity {
     @Excel(name = "职称编码")
     private String jobTitleCode;
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     public void setCode(String code) {

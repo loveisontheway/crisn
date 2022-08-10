@@ -75,7 +75,7 @@ public class EpcAlarmController extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('epc:alarm:get')")
     @GetMapping("/{id}")
-    public AjaxResult get(@PathVariable("id") Long id) {
+    public AjaxResult get(@PathVariable("id") Integer id) {
         return AjaxResult.success(epcAlarmService.getById(id));
     }
 
@@ -105,7 +105,7 @@ public class EpcAlarmController extends BaseController {
     @PreAuthorize("@ss.hasPermi('epc:alarm:del')")
     @Log(title = "告警" , businessType = BusinessTypeEnum.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult del(@PathVariable Long[] ids) {
+    public AjaxResult del(@PathVariable Integer[] ids) {
         LambdaUpdateWrapper<EpcAlarm> wrapper = new LambdaUpdateWrapper<>();
         wrapper.in(EpcAlarm::getId, ids);
         wrapper.set(EpcAlarm::getState, 1);

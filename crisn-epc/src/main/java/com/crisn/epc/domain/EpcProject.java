@@ -17,7 +17,7 @@ public class EpcProject extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Integer id;
 
     /** 工井编码（外键epc_well） */
     @Excel(name = "工井编码（外键epc_well）")
@@ -117,11 +117,11 @@ public class EpcProject extends BaseEntity {
     @Excel(name = "工作负责人电话")
     private String personPhone;
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     public void setWellCode(String wellCode) {

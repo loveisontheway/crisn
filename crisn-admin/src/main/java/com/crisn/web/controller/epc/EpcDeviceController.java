@@ -75,7 +75,7 @@ public class EpcDeviceController extends BaseController {
      */
     @PreAuthorize("@ss.hasPermi('epc:device:get')")
     @GetMapping("/{id}")
-    public AjaxResult get(@PathVariable("id") Long id) {
+    public AjaxResult get(@PathVariable("id") Integer id) {
         return AjaxResult.success(epcDeviceService.getById(id));
     }
 
@@ -105,7 +105,7 @@ public class EpcDeviceController extends BaseController {
     @PreAuthorize("@ss.hasPermi('epc:device:del')")
     @Log(title = "设备" , businessType = BusinessTypeEnum.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult del(@PathVariable Long[] ids) {
+    public AjaxResult del(@PathVariable Integer[] ids) {
         LambdaUpdateWrapper<EpcDevice> wrapper = new LambdaUpdateWrapper<>();
         wrapper.in(EpcDevice::getId, ids);
         wrapper.set(EpcDevice::getState, 1);
