@@ -40,20 +40,6 @@ public class EpcWell extends BaseEntity {
     @Excel(name = "纬度")
     private BigDecimal lat;
 
-    /** 数据插入时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "数据插入时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date dataInsertTime;
-
-    /** 数据更新时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "数据更新时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date dataUpdateTime;
-
-    /** 排序 */
-    @Excel(name = "排序")
-    private Long sort;
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -96,27 +82,6 @@ public class EpcWell extends BaseEntity {
     public BigDecimal getLat() {
         return lat;
     }
-    public void setDataInsertTime(Date dataInsertTime) {
-        this.dataInsertTime = dataInsertTime;
-    }
-
-    public Date getDataInsertTime() {
-        return dataInsertTime;
-    }
-    public void setDataUpdateTime(Date dataUpdateTime) {
-        this.dataUpdateTime = dataUpdateTime;
-    }
-
-    public Date getDataUpdateTime() {
-        return dataUpdateTime;
-    }
-    public void setSort(Long sort) {
-        this.sort = sort;
-    }
-
-    public Long getSort() {
-        return sort;
-    }
 
     @Override
     public String toString() {
@@ -127,9 +92,6 @@ public class EpcWell extends BaseEntity {
             .append("type", getType())
             .append("lon", getLon())
             .append("lat", getLat())
-            .append("dataInsertTime", getDataInsertTime())
-            .append("dataUpdateTime", getDataUpdateTime())
-            .append("sort", getSort())
             .append("state", getState())
             .append("remark", getRemark())
             .append("createBy", getCreateBy())
