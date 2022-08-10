@@ -188,6 +188,13 @@
                 <version>${crisn.version}</version>
             </dependency>
 
+            <!-- 工程模块-->
+            <dependency>
+                <groupId>com.crisn</groupId>
+                <artifactId>crisn-epc</artifactId>
+                <version>${crisn.version}</version>
+            </dependency>
+
             <!-- MyBatis Plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
@@ -205,6 +212,7 @@
         <module>crisn-quartz</module>
         <module>crisn-generator</module>
         <module>crisn-common</module>
+        <module>crisn-epc</module>
     </modules>
     <packaging>pom</packaging>
 

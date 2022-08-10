@@ -61,6 +61,12 @@
             <artifactId>crisn-generator</artifactId>
         </dependency>
 
+        <!-- 工程模块-->
+        <dependency>
+            <groupId>com.crisn</groupId>
+            <artifactId>crisn-epc</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
