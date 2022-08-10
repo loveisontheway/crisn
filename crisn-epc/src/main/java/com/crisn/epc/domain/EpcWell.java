@@ -54,10 +54,6 @@ public class EpcWell extends BaseEntity {
     @Excel(name = "排序")
     private Long sort;
 
-    /** 状态值（0=启用 1=停用） */
-    @Excel(name = "状态值", readConverterExp = "0=启用,1=停用")
-    private Integer state;
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -120,13 +116,6 @@ public class EpcWell extends BaseEntity {
 
     public Long getSort() {
         return sort;
-    }
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    public Integer getState() {
-        return state;
     }
 
     @Override

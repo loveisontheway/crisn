@@ -37,10 +37,6 @@ public class EpcAlarm extends BaseEntity {
     @Excel(name = "处理状态", readConverterExp = "0=已处理,1=未处理")
     private Integer status;
 
-    /** 状态值（0=启用 1=停用） */
-    @Excel(name = "状态值", readConverterExp = "0=启用,1=停用")
-    private Integer state;
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -82,13 +78,6 @@ public class EpcAlarm extends BaseEntity {
 
     public Integer getStatus() {
         return status;
-    }
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    public Integer getState() {
-        return state;
     }
 
     @Override

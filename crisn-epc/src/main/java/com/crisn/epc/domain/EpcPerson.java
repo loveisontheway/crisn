@@ -65,10 +65,6 @@ public class EpcPerson extends BaseEntity {
     @Excel(name = "是否离场", readConverterExp = "0=是,1=否")
     private Integer isDeparture;
 
-    /** 状态值（0=启用 1=停用） */
-    @Excel(name = "状态值", readConverterExp = "0=启用,1=停用")
-    private Integer state;
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -159,13 +155,6 @@ public class EpcPerson extends BaseEntity {
 
     public Integer getIsDeparture() {
         return isDeparture;
-    }
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    public Integer getState() {
-        return state;
     }
 
     @Override

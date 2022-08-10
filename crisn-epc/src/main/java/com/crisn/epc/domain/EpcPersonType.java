@@ -33,10 +33,6 @@ public class EpcPersonType extends BaseEntity {
     @Excel(name = "职称编码")
     private String jobTitleCode;
 
-    /** 状态值（0=启用 1=停用） */
-    @Excel(name = "状态值", readConverterExp = "0=启用,1=停用")
-    private Integer state;
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -71,13 +67,6 @@ public class EpcPersonType extends BaseEntity {
 
     public String getJobTitleCode() {
         return jobTitleCode;
-    }
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    public Integer getState() {
-        return state;
     }
 
     @Override

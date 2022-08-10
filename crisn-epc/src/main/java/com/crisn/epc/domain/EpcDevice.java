@@ -46,10 +46,6 @@ public class EpcDevice extends BaseEntity {
     @Excel(name = "设备电量")
     private BigDecimal kwh;
 
-    /** 状态值（0=启用 1=停用） */
-    @Excel(name = "状态值", readConverterExp = "0=启用,1=停用")
-    private Integer state;
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -105,13 +101,6 @@ public class EpcDevice extends BaseEntity {
 
     public BigDecimal getKwh() {
         return kwh;
-    }
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    public Integer getState() {
-        return state;
     }
 
     @Override
