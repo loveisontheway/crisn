@@ -50,6 +50,11 @@ public class BaseEntity implements Serializable {
     private String remark;
 
     /**
+     * 状态值（0=启用 1=停用）
+     */
+    private Integer state;
+
+    /**
      * 请求参数
      */
     @TableField(exist = false)
@@ -101,6 +106,14 @@ public class BaseEntity implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public Map<String, Object> getParams() {
