@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
+import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeNodeConfig;
+import cn.hutool.core.lang.tree.TreeUtil;
+import com.crisn.common.core.domain.TreeSelect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -113,7 +117,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
         for (Long dictId : dictIds) {
             SysDictType dictType = selectDictTypeById(dictId);
             if (dictDataMapper.countDictDataByType(dictType.getDictType()) > 0) {
-                throw new ServiceException(String.format("%1$s已分配,不能删除", dictType.getDictName()));
+                throw new ServiceException(String.format("%1$s已分配,不能删除" , dictType.getDictName()));
             }
             dictTypeMapper.deleteDictTypeById(dictId);
             DictUtil.removeDictCache(dictType.getDictType());
@@ -198,5 +202,22 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
             return UserConst.NOT_UNIQUE;
         }
         return UserConst.UNIQUE;
+    }
+
+    /**
+     * 字典树All原数据
+     *
+     * @param dictType object
+     * @return List<Tree < String>>
+     */
+    @Override
+    public List<Tree<String>> selectDictTypeTree(SysDictType dictType) {
+        List<SysDictType> list = dictTypeMapper.selectDictTypeTree(dictType);
+        List<Tree<String>> treeList = TreeUtil.build(list, "0" , null, (obj, tree) -> {
+            tree.setId(String.valueOf(obj.getDictId()));
+            tree.setParentId(String.valueOf(obj.getPid()));
+            tree.setName(obj.getDictName());
+        });
+        return treeList;
     }
 }

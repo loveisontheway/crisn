@@ -639,6 +639,7 @@ create table sys_dict_type
   dict_id          bigint(20)      not null auto_increment    comment '字典主键',
   dict_name        varchar(100)    default ''                 comment '字典名称',
   dict_type        varchar(100)    default ''                 comment '字典类型',
+  pid              bigint(20)      default null               comment '父id',
   status           char(1)         default '0'                comment '状态（0正常 1停用）',
   create_by        varchar(64)     default ''                 comment '创建者',
   create_time      datetime                                   comment '创建时间',
@@ -649,16 +650,17 @@ create table sys_dict_type
   unique (dict_type)
 ) engine=innodb auto_increment=100 comment = '字典类型表';
 
-insert into sys_dict_type values(1,  '用户性别', 'sys_user_sex',        '0', 'admin', sysdate(), '', null, '用户性别列表');
-insert into sys_dict_type values(2,  '菜单状态', 'sys_show_hide',       '0', 'admin', sysdate(), '', null, '菜单状态列表');
-insert into sys_dict_type values(3,  '系统开关', 'sys_normal_disable',  '0', 'admin', sysdate(), '', null, '系统开关列表');
-insert into sys_dict_type values(4,  '任务状态', 'sys_job_status',      '0', 'admin', sysdate(), '', null, '任务状态列表');
-insert into sys_dict_type values(5,  '任务分组', 'sys_job_group',       '0', 'admin', sysdate(), '', null, '任务分组列表');
-insert into sys_dict_type values(6,  '系统是否', 'sys_yes_no',          '0', 'admin', sysdate(), '', null, '系统是否列表');
-insert into sys_dict_type values(7,  '通知类型', 'sys_notice_type',     '0', 'admin', sysdate(), '', null, '通知类型列表');
-insert into sys_dict_type values(8,  '通知状态', 'sys_notice_status',   '0', 'admin', sysdate(), '', null, '通知状态列表');
-insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'admin', sysdate(), '', null, '操作类型列表');
-insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'admin', sysdate(), '', null, '登录状态列表');
+insert into sys_dict_type values(1,  '用户性别', 'sys_user_sex',        11, '0', 'admin', sysdate(), '', null, '用户性别列表');
+insert into sys_dict_type values(2,  '菜单状态', 'sys_show_hide',       11, '0', 'admin', sysdate(), '', null, '菜单状态列表');
+insert into sys_dict_type values(3,  '系统开关', 'sys_normal_disable',  11, '0', 'admin', sysdate(), '', null, '系统开关列表');
+insert into sys_dict_type values(4,  '任务状态', 'sys_job_status',      11, '0', 'admin', sysdate(), '', null, '任务状态列表');
+insert into sys_dict_type values(5,  '任务分组', 'sys_job_group',       11, '0', 'admin', sysdate(), '', null, '任务分组列表');
+insert into sys_dict_type values(6,  '系统是否', 'sys_yes_no',          11, '0', 'admin', sysdate(), '', null, '系统是否列表');
+insert into sys_dict_type values(7,  '通知类型', 'sys_notice_type',     11, '0', 'admin', sysdate(), '', null, '通知类型列表');
+insert into sys_dict_type values(8,  '通知状态', 'sys_notice_status',   11, '0', 'admin', sysdate(), '', null, '通知状态列表');
+insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       11, '0', 'admin', sysdate(), '', null, '操作类型列表');
+insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   11, '0', 'admin', sysdate(), '', null, '登录状态列表');
+insert into sys_dict_type values(11, '系统管理', 'system',               0, '0', 'admin', sysdate(), '', null, '系统管理');
 
 
 -- ----------------------------
@@ -735,7 +737,7 @@ create table sys_config (
 insert into sys_config values(1, '主框架页-默认皮肤样式名称',     'sys.index.skinName',            'skin-blue',     'Y', 'admin', sysdate(), '', null, '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow' );
 insert into sys_config values(2, '用户管理-账号初始密码',         'sys.user.initPassword',         '123456',        'Y', 'admin', sysdate(), '', null, '初始化密码 123456' );
 insert into sys_config values(3, '主框架页-侧边栏主题',           'sys.index.sideTheme',           'theme-dark',    'Y', 'admin', sysdate(), '', null, '深色主题theme-dark，浅色主题theme-light' );
-insert into sys_config values(4, '账号自助-验证码开关',           'sys.account.captchaEnabled',    'true',          'Y', 'admin', sysdate(), '', null, '是否开启验证码功能（true开启，false关闭）');
+insert into sys_config values(4, '账号自助-验证码开关',           'sys.account.captchaEnabled',    'false',          'Y', 'admin', sysdate(), '', null, '是否开启验证码功能（true开启，false关闭）');
 insert into sys_config values(5, '账号自助-是否开启用户注册功能', 'sys.account.registerUser',      'false',         'Y', 'admin', sysdate(), '', null, '是否开启注册用户功能（true开启，false关闭）');
 
 

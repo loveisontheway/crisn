@@ -10,6 +10,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.crisn.common.annotation.Excel;
 import com.crisn.common.annotation.Excel.ColumnType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 字典类型表 sys_dict_type
  *
@@ -37,6 +40,11 @@ public class SysDictType extends BaseEntity {
     private String dictType;
 
     /**
+     * 父id
+     */
+    private Long pid;
+
+    /**
      * 状态（0正常 1停用）
      */
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
@@ -58,6 +66,14 @@ public class SysDictType extends BaseEntity {
 
     public void setDictName(String dictName) {
         this.dictName = dictName;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
     }
 
     @NotBlank(message = "字典类型不能为空")
@@ -85,6 +101,7 @@ public class SysDictType extends BaseEntity {
                 .append("dictId", getDictId())
                 .append("dictName", getDictName())
                 .append("dictType", getDictType())
+                .append("pid", getPid())
                 .append("status", getStatus())
                 .append("createBy", getCreateBy())
                 .append("createTime", getCreateTime())

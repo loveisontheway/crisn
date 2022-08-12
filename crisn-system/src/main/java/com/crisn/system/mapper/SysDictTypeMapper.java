@@ -80,4 +80,12 @@ public interface SysDictTypeMapper {
      * @return 结果
      */
     public SysDictType checkDictTypeUnique(String dictType);
+
+    /**
+     * 字典树All原数据
+     *
+     * @param dictType object
+     * @return List<SysDictType>
+     */
+    List<SysDictType> selectDictTypeTree(SysDictType dictType);
 }

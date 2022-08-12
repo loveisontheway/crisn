@@ -2,6 +2,8 @@ package com.crisn.system.service;
 
 import java.util.List;
 
+import cn.hutool.core.lang.tree.Tree;
+import com.crisn.common.core.domain.TreeSelect;
 import com.crisn.common.core.domain.entity.SysDictData;
 import com.crisn.common.core.domain.entity.SysDictType;
 
@@ -95,4 +97,12 @@ public interface SysDictTypeService {
      * @return 结果
      */
     public String checkDictTypeUnique(SysDictType dictType);
+
+    /**
+     * 字典树All原数据
+     *
+     * @param dictType object
+     * @return List<Tree<String>>
+     */
+    List<Tree<String>> selectDictTypeTree(SysDictType dictType);
 }

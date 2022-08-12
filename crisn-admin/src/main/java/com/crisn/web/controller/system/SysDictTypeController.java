@@ -1,19 +1,6 @@
 package com.crisn.web.controller.system;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import cn.hutool.core.lang.tree.Tree;
 import com.crisn.common.annotation.Log;
 import com.crisn.common.constant.UserConst;
 import com.crisn.common.core.controller.BaseController;
@@ -23,6 +10,13 @@ import com.crisn.common.core.page.TableDataInfo;
 import com.crisn.common.enums.BusinessTypeEnum;
 import com.crisn.common.utils.poi.ExcelUtil;
 import com.crisn.system.service.SysDictTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 数据字典信息
@@ -41,6 +35,13 @@ public class SysDictTypeController extends BaseController {
         startPage();
         List<SysDictType> list = dictTypeService.selectDictTypeList(dictType);
         return getDataTable(list);
+    }
+
+    @PreAuthorize("@ss.hasPermi('system:dict:tree')")
+    @GetMapping("/tree")
+    public AjaxResult tree(SysDictType dictType) {
+        List<Tree<String>> list = dictTypeService.selectDictTypeTree(dictType);
+        return AjaxResult.success(list);
     }
 
     @Log(title = "字典类型", businessType = BusinessTypeEnum.EXPORT)

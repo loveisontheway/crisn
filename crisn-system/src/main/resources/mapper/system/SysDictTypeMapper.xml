@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id     property="dictId"     column="dict_id"     />
 		<result property="dictName"   column="dict_name"   />
 		<result property="dictType"   column="dict_type"   />
+		<result property="pid"   	  column="pid"   	   />
 		<result property="status"     column="status"      />
 		<result property="createBy"   column="create_by"   />
 		<result property="createTime" column="create_time" />
@@ -16,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectDictTypeVo">
-        select dict_id, dict_name, dict_type, status, create_by, create_time, remark 
+        select dict_id, dict_name, dict_type, pid, status, create_by, create_time, remark
 		from sys_dict_type
     </sql>
 
@@ -101,5 +102,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			sysdate()
  		)
 	</insert>
+
+	<select id="selectDictTypeTree" parameterType="SysDictType" resultMap="SysDictTypeResult">
+		<include refid="selectDictTypeVo"/>
+		<where>
+			<if test="dictName != null and dictName != ''">
+				AND dict_name like concat('%', #{dictName}, '%')
+			</if>
+			<if test="dictType != null and dictType != ''">
+				AND dict_type like concat('%', #{dictType}, '%')
+			</if>
+		</where>
+	</select>
 	
 </mapper> 
