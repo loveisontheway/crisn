@@ -71,7 +71,7 @@ public class EpcPersonTypeController extends BaseController {
     }
 
     /**
-     * 获取-人员类型详细信息
+     * 获取-人员类型
      */
     @PreAuthorize("@ss.hasPermi('epc:person_type:get')")
     @GetMapping("/{id}")

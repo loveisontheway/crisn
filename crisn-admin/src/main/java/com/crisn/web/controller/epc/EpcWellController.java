@@ -71,7 +71,7 @@ public class EpcWellController extends BaseController {
     }
 
     /**
-     * 获取-工井详细信息
+     * 获取-工井
      */
     @PreAuthorize("@ss.hasPermi('epc:well:get')")
     @GetMapping("/{id}")

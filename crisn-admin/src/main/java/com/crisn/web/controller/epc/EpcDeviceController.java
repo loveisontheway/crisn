@@ -71,7 +71,7 @@ public class EpcDeviceController extends BaseController {
     }
 
     /**
-     * 获取-设备详细信息
+     * 获取-设备
      */
     @PreAuthorize("@ss.hasPermi('epc:device:get')")
     @GetMapping("/{id}")

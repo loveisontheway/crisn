@@ -71,7 +71,7 @@ public class EpcProjectController extends BaseController {
     }
 
     /**
-     * 获取-项目详细信息
+     * 获取-项目
      */
     @PreAuthorize("@ss.hasPermi('epc:project:get')")
     @GetMapping("/{id}")

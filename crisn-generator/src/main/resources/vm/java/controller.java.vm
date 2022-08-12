@@ -72,7 +72,7 @@ public class ${ClassName}Controller extends BaseController {
     }
 
     /**
-     * 获取-${functionName}详细信息
+     * 获取-${functionName}
      */
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:get')")
     @GetMapping("/{${pkColumn.javaField}}")

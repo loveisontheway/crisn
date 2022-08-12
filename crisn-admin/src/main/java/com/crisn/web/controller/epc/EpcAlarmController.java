@@ -71,7 +71,7 @@ public class EpcAlarmController extends BaseController {
     }
 
     /**
-     * 获取-告警详细信息
+     * 获取-告警
      */
     @PreAuthorize("@ss.hasPermi('epc:alarm:get')")
     @GetMapping("/{id}")
