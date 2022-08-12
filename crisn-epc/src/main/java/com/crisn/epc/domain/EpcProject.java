@@ -1,5 +1,6 @@
 package com.crisn.epc.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.crisn.common.annotation.Excel;
@@ -34,6 +35,14 @@ public class EpcProject extends BaseEntity {
     /** 项目名称 */
     @Excel(name = "项目名称")
     private String name;
+
+    /** 经度 */
+    @Excel(name = "经度")
+    private BigDecimal lon;
+
+    /** 纬度 */
+    @Excel(name = "纬度")
+    private BigDecimal lat;
 
     /** 项目概况 */
     @Excel(name = "项目概况")
@@ -154,6 +163,22 @@ public class EpcProject extends BaseEntity {
     }
     public void setOverview(String overview) {
         this.overview = overview;
+    }
+
+    public BigDecimal getLon() {
+        return lon;
+    }
+
+    public void setLon(BigDecimal lon) {
+        this.lon = lon;
+    }
+
+    public BigDecimal getLat() {
+        return lat;
+    }
+
+    public void setLat(BigDecimal lat) {
+        this.lat = lat;
     }
 
     public String getOverview() {

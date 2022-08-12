@@ -144,6 +144,8 @@ CREATE TABLE `epc_project`  (
   `code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目编码',
   `type` tinyint(1) NULL DEFAULT NULL COMMENT '项目类型（1=建筑工程费 2=安装工程费 3=设备购置费 4=其他费用 5=基本预备费）',
   `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目名称',
+  `lon` decimal(10, 6) NULL DEFAULT NULL COMMENT '经度',
+  `lat` decimal(10, 6) NULL DEFAULT NULL COMMENT '纬度',
   `overview` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目概况',
   `build_unit` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '建设单位',
   `build_unit_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '建设单位编码',
