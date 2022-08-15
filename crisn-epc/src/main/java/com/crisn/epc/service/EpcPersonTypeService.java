@@ -7,7 +7,7 @@ import com.crisn.epc.domain.EpcPersonType;
  * 人员类型-Service
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public interface EpcPersonTypeService extends IService<EpcPersonType> {
 

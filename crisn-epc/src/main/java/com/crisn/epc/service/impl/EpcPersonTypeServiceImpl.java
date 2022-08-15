@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * 人员类型-业务逻辑处理
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 @Service
 public class EpcPersonTypeServiceImpl extends ServiceImpl<EpcPersonTypeMapper, EpcPersonType> implements EpcPersonTypeService {

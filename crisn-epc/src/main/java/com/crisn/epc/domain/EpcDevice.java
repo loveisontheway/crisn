@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 设备-epc_device
  * 
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public class EpcDevice extends BaseEntity {
 
@@ -26,20 +26,8 @@ public class EpcDevice extends BaseEntity {
     @Excel(name = "设备名称")
     private String name;
 
-    /** 工程编码（外键epc_project） */
-    @Excel(name = "工程编码（外键epc_project）")
-    private String projectCode;
-
-    /** 工井编码（外键epc_well） */
-    @Excel(name = "工井编码（外键epc_well）")
-    private String wellCode;
-
-    /** 告警编码（外键epc_alarm） */
-    @Excel(name = "告警编码（外键epc_alarm）")
-    private String alarmCode;
-
-    /** 设备状态 */
-    @Excel(name = "设备状态")
+    /** 设备状态（0=在线 1=离线） */
+    @Excel(name = "设备状态", readConverterExp = "0=在线,1=离线")
     private Integer status;
 
     /** 设备电量 */
@@ -67,27 +55,6 @@ public class EpcDevice extends BaseEntity {
     public String getName() {
         return name;
     }
-    public void setProjectCode(String projectCode) {
-        this.projectCode = projectCode;
-    }
-
-    public String getProjectCode() {
-        return projectCode;
-    }
-    public void setWellCode(String wellCode) {
-        this.wellCode = wellCode;
-    }
-
-    public String getWellCode() {
-        return wellCode;
-    }
-    public void setAlarmCode(String alarmCode) {
-        this.alarmCode = alarmCode;
-    }
-
-    public String getAlarmCode() {
-        return alarmCode;
-    }
     public void setStatus(Integer status) {
         this.status = status;
     }
@@ -109,9 +76,6 @@ public class EpcDevice extends BaseEntity {
             .append("id", getId())
             .append("code", getCode())
             .append("name", getName())
-            .append("projectCode", getProjectCode())
-            .append("wellCode", getWellCode())
-            .append("alarmCode", getAlarmCode())
             .append("status", getStatus())
             .append("kwh", getKwh())
             .append("state", getState())

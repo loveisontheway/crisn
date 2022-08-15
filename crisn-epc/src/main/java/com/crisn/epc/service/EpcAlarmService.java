@@ -7,7 +7,7 @@ import com.crisn.epc.domain.EpcAlarm;
  * 告警-Service
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public interface EpcAlarmService extends IService<EpcAlarm> {
 

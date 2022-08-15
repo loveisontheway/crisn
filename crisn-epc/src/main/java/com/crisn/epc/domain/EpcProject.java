@@ -9,10 +9,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * 项目-epc_project
+ * 工程-epc_project
  * 
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public class EpcProject extends BaseEntity {
 
@@ -20,21 +20,17 @@ public class EpcProject extends BaseEntity {
 
     private Integer id;
 
-    /** 工井编码（外键epc_well） */
-    @Excel(name = "工井编码（外键epc_well）")
-    private String wellCode;
-
-    /** 项目编码 */
-    @Excel(name = "项目编码")
+    /** 工程编码 */
+    @Excel(name = "工程编码")
     private String code;
 
-    /** 项目类型（1=建筑工程费 2=安装工程费 3=设备购置费 4=其他费用 5=基本预备费） */
-    @Excel(name = "项目类型", readConverterExp = "1=建筑工程费,2=安装工程费,3=设备购置费,4=其他费用,5=基本预备费")
-    private Integer type;
-
-    /** 项目名称 */
-    @Excel(name = "项目名称")
+    /** 工程名称 */
+    @Excel(name = "工程名称")
     private String name;
+
+    /** 工程类型（1=建筑工程费 2=安装工程费 3=设备购置费 4=其他费用 5=基本预备费） */
+    @Excel(name = "工程类型", readConverterExp = "1=建筑工程费,2=安装工程费,3=设备购置费,4=其他费用,5=基本预备费")
+    private Integer type;
 
     /** 经度 */
     @Excel(name = "经度")
@@ -44,8 +40,8 @@ public class EpcProject extends BaseEntity {
     @Excel(name = "纬度")
     private BigDecimal lat;
 
-    /** 项目概况 */
-    @Excel(name = "项目概况")
+    /** 工程概况 */
+    @Excel(name = "工程概况")
     private String overview;
 
     /** 建设单位 */
@@ -118,13 +114,13 @@ public class EpcProject extends BaseEntity {
     @Excel(name = "施工阶段", readConverterExp = "1=施工准备,2=电缆敷设,3=附件安装,4=验收消缺,5=施工暂停,6=竣工投产")
     private Integer stage;
 
-    /** 工作负责人 */
-    @Excel(name = "工作负责人")
-    private String person;
+    /** 工作负责人id（外键epc_person） */
+    @Excel(name = "工作负责人id（外键epc_person）")
+    private Integer workPersonId;
 
-    /** 工作负责人电话 */
-    @Excel(name = "工作负责人电话")
-    private String personPhone;
+    /** 作业班组长id（外键epc_person） */
+    @Excel(name = "作业班组长id（外键epc_person）")
+    private Integer jobPersonId;
 
     public void setId(Integer id) {
         this.id = id;
@@ -133,26 +129,12 @@ public class EpcProject extends BaseEntity {
     public Integer getId() {
         return id;
     }
-    public void setWellCode(String wellCode) {
-        this.wellCode = wellCode;
-    }
-
-    public String getWellCode() {
-        return wellCode;
-    }
     public void setCode(String code) {
         this.code = code;
     }
 
     public String getCode() {
         return code;
-    }
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getType() {
-        return type;
     }
     public void setName(String name) {
         this.name = name;
@@ -161,24 +143,29 @@ public class EpcProject extends BaseEntity {
     public String getName() {
         return name;
     }
-    public void setOverview(String overview) {
-        this.overview = overview;
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+    public void setLon(BigDecimal lon) {
+        this.lon = lon;
     }
 
     public BigDecimal getLon() {
         return lon;
     }
-
-    public void setLon(BigDecimal lon) {
-        this.lon = lon;
+    public void setLat(BigDecimal lat) {
+        this.lat = lat;
     }
 
     public BigDecimal getLat() {
         return lat;
     }
-
-    public void setLat(BigDecimal lat) {
-        this.lat = lat;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public String getOverview() {
@@ -296,29 +283,30 @@ public class EpcProject extends BaseEntity {
     public Integer getStage() {
         return stage;
     }
-    public void setPerson(String person) {
-        this.person = person;
+    public void setWorkPersonId(Integer workPersonId) {
+        this.workPersonId = workPersonId;
     }
 
-    public String getPerson() {
-        return person;
+    public Integer getWorkPersonId() {
+        return workPersonId;
     }
-    public void setPersonPhone(String personPhone) {
-        this.personPhone = personPhone;
+    public void setJobPersonId(Integer jobPersonId) {
+        this.jobPersonId = jobPersonId;
     }
 
-    public String getPersonPhone() {
-        return personPhone;
+    public Integer getJobPersonId() {
+        return jobPersonId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
-            .append("wellCode", getWellCode())
             .append("code", getCode())
-            .append("type", getType())
             .append("name", getName())
+            .append("type", getType())
+            .append("lon", getLon())
+            .append("lat", getLat())
             .append("overview", getOverview())
             .append("buildUnit", getBuildUnit())
             .append("buildUnitCode", getBuildUnitCode())
@@ -336,8 +324,8 @@ public class EpcProject extends BaseEntity {
             .append("projectDeptCode", getProjectDeptCode())
             .append("projectDeptType", getProjectDeptType())
             .append("stage", getStage())
-            .append("person", getPerson())
-            .append("personPhone", getPersonPhone())
+            .append("workPersonId", getWorkPersonId())
+            .append("jobPersonId", getJobPersonId())
             .append("state", getState())
             .append("remark", getRemark())
             .append("createBy", getCreateBy())

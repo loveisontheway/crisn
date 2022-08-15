@@ -22,10 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 项目-Controller
+ * 工程-Controller
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 @RestController
 @RequestMapping("/epc/project")
@@ -35,7 +35,7 @@ public class EpcProjectController extends BaseController {
     private EpcProjectService epcProjectService;
 
     /**
-     * 分页-项目
+     * 分页-工程
      */
     @PreAuthorize("@ss.hasPermi('epc:project:page')")
     @GetMapping("/page")
@@ -47,7 +47,7 @@ public class EpcProjectController extends BaseController {
     }
 
     /**
-     * 列表-项目
+     * 列表-工程
      */
     @PreAuthorize("@ss.hasPermi('epc:project:list')")
     @GetMapping("/list")
@@ -58,20 +58,20 @@ public class EpcProjectController extends BaseController {
     }
 
     /**
-     * 导出-项目
+     * 导出-工程
      */
     @PreAuthorize("@ss.hasPermi('epc:project:exp')")
-    @Log(title = "项目" , businessType = BusinessTypeEnum.EXPORT)
+    @Log(title = "工程" , businessType = BusinessTypeEnum.EXPORT)
     @PostMapping("/exp")
     public void exp(HttpServletResponse response, EpcProject epcProject) {
         QueryWrapper<EpcProject> wrapper = WrapperUtil.entityToWrapper(epcProject);
         List<EpcProject> list = epcProjectService.list(wrapper);
         ExcelUtil<EpcProject> util = new ExcelUtil<EpcProject>(EpcProject. class);
-        util.exportExcel(response, list, "项目数据");
+        util.exportExcel(response, list, "工程数据");
     }
 
     /**
-     * 获取-项目
+     * 获取-工程
      */
     @PreAuthorize("@ss.hasPermi('epc:project:get')")
     @GetMapping("/{id}")
@@ -80,30 +80,30 @@ public class EpcProjectController extends BaseController {
     }
 
     /**
-     * 新增-项目
+     * 新增-工程
      */
     @PreAuthorize("@ss.hasPermi('epc:project:add')")
-    @Log(title = "项目" , businessType = BusinessTypeEnum.INSERT)
+    @Log(title = "工程" , businessType = BusinessTypeEnum.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody EpcProject epcProject) {
         return toAjax(epcProjectService.save(epcProject));
     }
 
     /**
-     * 修改-项目
+     * 修改-工程
      */
     @PreAuthorize("@ss.hasPermi('epc:project:edit')")
-    @Log(title = "项目" , businessType = BusinessTypeEnum.UPDATE)
+    @Log(title = "工程" , businessType = BusinessTypeEnum.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody EpcProject epcProject) {
         return toAjax(epcProjectService.updateById(epcProject));
     }
 
     /**
-     * 删除-项目
+     * 删除-工程
      */
     @PreAuthorize("@ss.hasPermi('epc:project:del')")
-    @Log(title = "项目" , businessType = BusinessTypeEnum.DELETE)
+    @Log(title = "工程" , businessType = BusinessTypeEnum.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult del(@PathVariable Integer[] ids) {
         LambdaUpdateWrapper<EpcProject> wrapper = new LambdaUpdateWrapper<>();

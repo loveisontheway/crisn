@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * 设备-业务逻辑处理
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 @Service
 public class EpcDeviceServiceImpl extends ServiceImpl<EpcDeviceMapper, EpcDevice> implements EpcDeviceService {

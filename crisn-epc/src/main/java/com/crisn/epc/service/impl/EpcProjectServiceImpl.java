@@ -8,10 +8,10 @@ import com.crisn.epc.service.EpcProjectService;
 import org.springframework.stereotype.Service;
 
 /**
- * 项目-业务逻辑处理
+ * 工程-业务逻辑处理
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 @Service
 public class EpcProjectServiceImpl extends ServiceImpl<EpcProjectMapper, EpcProject> implements EpcProjectService {

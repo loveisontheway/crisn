@@ -7,7 +7,7 @@ import com.crisn.epc.domain.EpcWell;
  * 工井-Mapper
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public interface EpcWellMapper extends BaseMapper<EpcWell> {
 

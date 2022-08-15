@@ -7,7 +7,7 @@ import com.crisn.epc.domain.EpcDevice;
  * 设备-Mapper
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public interface EpcDeviceMapper extends BaseMapper<EpcDevice> {
 

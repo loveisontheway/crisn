@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 人员类型-epc_person_type
  * 
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public class EpcPersonType extends BaseEntity {
 

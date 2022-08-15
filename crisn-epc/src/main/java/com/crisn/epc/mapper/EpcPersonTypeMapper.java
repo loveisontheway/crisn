@@ -7,7 +7,7 @@ import com.crisn.epc.domain.EpcPersonType;
  * 人员类型-Mapper
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public interface EpcPersonTypeMapper extends BaseMapper<EpcPersonType> {
 

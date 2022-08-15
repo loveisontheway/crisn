@@ -12,9 +12,7 @@ USE `crisn`;
 DROP TABLE IF EXISTS `epc_alarm`;
 CREATE TABLE `epc_alarm`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '设备编码（外键epc_device）',
-  `project_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工程编码（外键epc_project）',
-  `well_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工井编码（外键epc_well）',
+  `code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '告警编码',
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '告警内容',
   `status` tinyint(1) NULL DEFAULT NULL COMMENT '处理状态（0=已处理 1=未处理）',
   `state` tinyint(1) NULL DEFAULT 0 COMMENT '状态值（0=启用 1=停用）',
@@ -27,6 +25,10 @@ CREATE TABLE `epc_alarm`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '告警表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of epc_alarm
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for epc_device
 -- ----------------------------
 DROP TABLE IF EXISTS `epc_device`;
@@ -34,10 +36,7 @@ CREATE TABLE `epc_device`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '设备编码',
   `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备名称',
-  `project_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工程编码（外键epc_project）',
-  `well_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工井编码（外键epc_well）',
-  `alarm_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '告警编码（外键epc_alarm）',
-  `status` tinyint(1) NULL DEFAULT NULL COMMENT '设备状态',
+  `status` tinyint(1) NULL DEFAULT NULL COMMENT '设备状态（0=在线 1=离线）',
   `kwh` decimal(10, 2) NULL DEFAULT NULL COMMENT '设备电量',
   `state` tinyint(1) NULL DEFAULT 0 COMMENT '状态值（0=启用 1=停用）',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
@@ -49,18 +48,46 @@ CREATE TABLE `epc_device`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '设备表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of epc_device
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for epc_middle
+-- ----------------------------
+DROP TABLE IF EXISTS `epc_middle`;
+CREATE TABLE `epc_middle`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` tinyint(1) NULL DEFAULT NULL COMMENT '类型（1=工程关联 2=工井关联 3=设备关联 4=告警关联 5=人员关联）',
+  `project_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工程编码（外键epc_project）',
+  `well_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工井编码（外键epc_well）',
+  `device_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备编码（外键epc_device）',
+  `alarm_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '告警编码（外键epc_alarm）',
+  `person_id` int(11) NULL DEFAULT NULL COMMENT '人员id（外键epc_person）',
+  `state` tinyint(1) NULL DEFAULT 0 COMMENT '状态值（0=启用 1=停用）',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '中间关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of epc_middle
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for epc_person
 -- ----------------------------
 DROP TABLE IF EXISTS `epc_person`;
 CREATE TABLE `epc_person`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '姓名',
-  `sex` tinyint(1) NULL DEFAULT NULL COMMENT '性别（1=男 2=女 3=其它）',
-  `sex_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目编码',
+  `sex` tinyint(1) NULL DEFAULT NULL COMMENT '性别（0=女 1=男）',
+  `sex_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '性别编码',
   `mobile` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
-  `project_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工程编码',
-  `person_type_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '人员类型（外键epc_person_type）',
-  `project_dept_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目部类型（1=业主项目部 2=监理项目部 3=施工项目部）',
+  `person_type_id` int(11) NULL DEFAULT NULL COMMENT '人员类型id（外键epc_person_type）',
+  `project_dept_type` tinyint(1) NULL DEFAULT NULL COMMENT '项目部类型（1=业主项目部 2=监理项目部 3=施工项目部）',
   `card` char(18) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '身份证',
   `card_encrypt` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '身份证（加密）',
   `is_valid` tinyint(1) NULL DEFAULT NULL COMMENT '是否有效（0=是 1=否）',
@@ -74,6 +101,10 @@ CREATE TABLE `epc_person`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '人员表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of epc_person
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for epc_person_type
@@ -140,13 +171,12 @@ INSERT INTO `epc_person_type` VALUES (36, NULL, 4, '特殊工种作业人员', N
 DROP TABLE IF EXISTS `epc_project`;
 CREATE TABLE `epc_project`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `well_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '工井编码（外键epc_well）',
-  `code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目编码',
-  `type` tinyint(1) NULL DEFAULT NULL COMMENT '项目类型（1=建筑工程费 2=安装工程费 3=设备购置费 4=其他费用 5=基本预备费）',
-  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目名称',
+  `code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工程编码',
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工程名称',
+  `type` tinyint(1) NULL DEFAULT NULL COMMENT '工程类型（1=建筑工程费 2=安装工程费 3=设备购置费 4=其他费用 5=基本预备费）',
   `lon` decimal(10, 6) NULL DEFAULT NULL COMMENT '经度',
   `lat` decimal(10, 6) NULL DEFAULT NULL COMMENT '纬度',
-  `overview` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目概况',
+  `overview` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工程概况',
   `build_unit` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '建设单位',
   `build_unit_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '建设单位编码',
   `supervision_unit` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '监理单位',
@@ -163,8 +193,8 @@ CREATE TABLE `epc_project`  (
   `project_dept_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目部编码',
   `project_dept_type` tinyint(1) NULL DEFAULT NULL COMMENT '项目部类型（1=业主项目部 2=监理项目部 3=施工项目部）',
   `stage` tinyint(1) NULL DEFAULT NULL COMMENT '施工阶段（1=施工准备 2=电缆敷设 3=附件安装 4=验收消缺 5=施工暂停 6=竣工投产）',
-  `person` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工作负责人',
-  `person_phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工作负责人电话',
+  `work_person_id` int(11) NULL DEFAULT NULL COMMENT '工作负责人id（外键epc_person）',
+  `job_person_id` int(11) NULL DEFAULT NULL COMMENT '作业班组长id（外键epc_person）',
   `state` tinyint(1) NULL DEFAULT 0 COMMENT '状态值（0=启用 1=停用）',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
@@ -172,7 +202,11 @@ CREATE TABLE `epc_project`  (
   `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改者',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '项目表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '工程表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of epc_project
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for epc_well
@@ -193,6 +227,10 @@ CREATE TABLE `epc_well`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '工井表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of epc_well
+-- ----------------------------
 
 -- ----------------------------
 -- 1、部门表

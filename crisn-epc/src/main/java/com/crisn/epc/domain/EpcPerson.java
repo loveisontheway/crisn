@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 人员-epc_person
  * 
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public class EpcPerson extends BaseEntity {
 
@@ -21,29 +21,25 @@ public class EpcPerson extends BaseEntity {
     @Excel(name = "姓名")
     private String name;
 
-    /** 性别（1=男 2=女 3=其它） */
-    @Excel(name = "性别", readConverterExp = "1=男,2=女,3=其它")
+    /** 性别（0=女 1=男） */
+    @Excel(name = "性别", readConverterExp = "0=女,1=男")
     private Integer sex;
 
-    /** 项目编码 */
-    @Excel(name = "项目编码")
+    /** 性别编码 */
+    @Excel(name = "性别编码")
     private String sexCode;
 
     /** 手机号 */
     @Excel(name = "手机号")
     private String mobile;
 
-    /** 工程编码 */
-    @Excel(name = "工程编码")
-    private String projectCode;
-
-    /** 人员类型（外键epc_person_type） */
-    @Excel(name = "人员类型（外键epc_person_type）")
-    private String personTypeId;
+    /** 人员类型id（外键epc_person_type） */
+    @Excel(name = "人员类型id（外键epc_person_type）")
+    private Integer personTypeId;
 
     /** 项目部类型（1=业主项目部 2=监理项目部 3=施工项目部） */
     @Excel(name = "项目部类型", readConverterExp = "1=业主项目部,2=监理项目部,3=施工项目部")
-    private String projectDeptType;
+    private Integer projectDeptType;
 
     /** 身份证 */
     @Excel(name = "身份证")
@@ -100,25 +96,18 @@ public class EpcPerson extends BaseEntity {
     public String getMobile() {
         return mobile;
     }
-    public void setProjectCode(String projectCode) {
-        this.projectCode = projectCode;
-    }
-
-    public String getProjectCode() {
-        return projectCode;
-    }
-    public void setPersonTypeId(String personTypeId) {
+    public void setPersonTypeId(Integer personTypeId) {
         this.personTypeId = personTypeId;
     }
 
-    public String getPersonTypeId() {
+    public Integer getPersonTypeId() {
         return personTypeId;
     }
-    public void setProjectDeptType(String projectDeptType) {
+    public void setProjectDeptType(Integer projectDeptType) {
         this.projectDeptType = projectDeptType;
     }
 
-    public String getProjectDeptType() {
+    public Integer getProjectDeptType() {
         return projectDeptType;
     }
     public void setCard(String card) {
@@ -165,7 +154,6 @@ public class EpcPerson extends BaseEntity {
             .append("sex", getSex())
             .append("sexCode", getSexCode())
             .append("mobile", getMobile())
-            .append("projectCode", getProjectCode())
             .append("personTypeId", getPersonTypeId())
             .append("projectDeptType", getProjectDeptType())
             .append("card", getCard())

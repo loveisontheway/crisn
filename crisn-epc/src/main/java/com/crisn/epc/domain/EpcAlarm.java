@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 告警-epc_alarm
  * 
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public class EpcAlarm extends BaseEntity {
 
@@ -17,17 +17,9 @@ public class EpcAlarm extends BaseEntity {
 
     private Integer id;
 
-    /** 设备编码（外键epc_device） */
-    @Excel(name = "设备编码（外键epc_device）")
-    private String deviceCode;
-
-    /** 工程编码（外键epc_project） */
-    @Excel(name = "工程编码（外键epc_project）")
-    private String projectCode;
-
-    /** 工井编码（外键epc_well） */
-    @Excel(name = "工井编码（外键epc_well）")
-    private String wellCode;
+    /** 告警编码 */
+    @Excel(name = "告警编码")
+    private String code;
 
     /** 告警内容 */
     @Excel(name = "告警内容")
@@ -44,26 +36,12 @@ public class EpcAlarm extends BaseEntity {
     public Integer getId() {
         return id;
     }
-    public void setDeviceCode(String deviceCode) {
-        this.deviceCode = deviceCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getDeviceCode() {
-        return deviceCode;
-    }
-    public void setProjectCode(String projectCode) {
-        this.projectCode = projectCode;
-    }
-
-    public String getProjectCode() {
-        return projectCode;
-    }
-    public void setWellCode(String wellCode) {
-        this.wellCode = wellCode;
-    }
-
-    public String getWellCode() {
-        return wellCode;
+    public String getCode() {
+        return code;
     }
     public void setContent(String content) {
         this.content = content;
@@ -84,9 +62,7 @@ public class EpcAlarm extends BaseEntity {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
-            .append("deviceCode", getDeviceCode())
-            .append("projectCode", getProjectCode())
-            .append("wellCode", getWellCode())
+            .append("code", getCode())
             .append("content", getContent())
             .append("status", getStatus())
             .append("state", getState())

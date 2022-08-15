@@ -1,8 +1,6 @@
 package com.crisn.epc.domain;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.crisn.common.annotation.Excel;
 import com.crisn.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 工井-epc_well
  * 
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public class EpcWell extends BaseEntity {
 

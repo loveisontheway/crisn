@@ -7,7 +7,7 @@ import com.crisn.epc.domain.EpcDevice;
  * 设备-Service
  *
  * @author crisn
- * @date 2022-08-10
+ * @date 2022-08-15
  */
 public interface EpcDeviceService extends IService<EpcDevice> {
 
