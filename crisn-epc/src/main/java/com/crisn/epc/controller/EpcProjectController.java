@@ -1,4 +1,4 @@
-package com.crisn.web.controller.epc;
+package com.crisn.epc.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
